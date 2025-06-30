@@ -33,7 +33,9 @@ Archive _cloneArchive(
   _archiveFiles.forEach((name, file) {
     if (!archive.files.any((f) => f.name == name)) {
       var compress = !_noCompression.contains(name);
-      file.compress = compress;
+      if (!compress) {
+        file.compression = CompressionType.none;
+      }
       clone.addFile(file);
     }
   });
